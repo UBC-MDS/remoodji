@@ -1,15 +1,29 @@
 Package: remoodji
-Title: What the Package Does (One Line, Title Case)
+Title: Remoodji is a text analysis package that focuses on sentiment analysis in text files in quantitative and qualitative ways.
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Rachel",
+           family = "Wong",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "rachel.wong@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+    person(given = "Yiki",
+           family = "Su",
+           role = c("aut", "cre"),
+           email = "sueyi@student.ubc.ca",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person(given = "Aidan",
+           family = "Mattrick",
+           role = c("aut", "cre"),
+           email = "rachel.wong@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person(given = "Kevin",
+           family = "Shahnazari",
+           role = c("aut", "cre"),
+           email = "rachel.wong@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Remoodji is a text analysis package that focuses on sentiment analysis in text files in quantitative and qualitative ways. Specifically, it is used for determining what kind of underlying emotion your input text gives off and quantitatives analyses of your text (character, word, and sentence count as well as visual and quantitative sentiment analysis). The emotions analyzed include angry, sad, happy, and disgust. Another core feature of Pyemoodji is it replaces words with emojis to provide the user with a text file where it is easier to pick up on the emotions being conveyed in a visually appealling snapshot view. This package can be useful when proofreading an important message which you want to elicit a certain emotion or tone, particularly with a given pattern or rhythm (speeches, letters, applications, songs, poems, etc).
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
