@@ -15,7 +15,7 @@ Authors@R:
     person(given = "Aidan",
            family = "Mattrick",
            role = c("aut", "cre"),
-           email = "rachel.wong@gmail.com",
+           email = "aidan.mattrick@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
     person(given = "Kevin",
            family = "Shahnazari",
