@@ -1,5 +1,5 @@
 Package: remoodji
-Title: Remoodji is a text analysis package that focuses on sentiment analysis in text files in quantitative and qualitative ways.
+Title: Remoodji is a text analysis package that focuses on sentiment analysis in text files in quantitative and qualitative ways
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Rachel",
@@ -28,3 +28,8 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    forcats
