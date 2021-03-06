@@ -15,12 +15,12 @@ Authors@R:
     person(given = "Aidan",
            family = "Mattrick",
            role = c("aut", "cre"),
-           email = "rachel.wong@gmail.com",
+           email = "aidan.mattrick@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
     person(given = "Kevin",
            family = "Shahnazari",
            role = c("aut", "cre"),
-           email = "rachel.wong@gmail.com",
+           email = "kshahnazari@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Remoodji is a text analysis package that focuses on sentiment analysis in text files in quantitative and qualitative ways. Specifically, it is used for determining what kind of underlying emotion your input text gives off and quantitative analyses of your text (character, word, and sentence count as well as visual and quantitative sentiment analysis). The emotions analyzed include angry, sad, happy, and disgust. Another core feature of Remoodji is it replaces words with emojis to provide the user with a text file where it is easier to pick up on the emotions being conveyed in a visually appealling snapshot view. This package can be useful when proofreading an important message which you want to elicit a certain emotion or tone, particularly with a given pattern or rhythm (speeches, letters, applications, songs, poems, etc).
 License: MIT + file LICENSE
