@@ -2,60 +2,58 @@
 
 #' Sentiment df Function
 #'
-#' Create a new factor from two existing factors, where the new factor's levels
-#' are the union of the levels of the input factors.
+#' Generates a sentiment analysis summary dataframe of the input text. The summary dataframe would include 
+#' the sentiment type, sentiment words, number of sentiment words, and highest sentiment percentage.
 #'
-#' @param text factor
-#' @param sentiment factor
+#' @param text string: the input text for sentiment analysis
+#' @param sentiment string (optional): the sentiment that the analysis focuses on, could be happy, angry, or sad etc. Defaults to "all".
 #'
-#' @return factor
+#' @return dataframe: a data frame that contains the summary of sentiment analysis
 #' @export
-#' #examples
-#' fbind(iris$Species[c(1, 51, 101)], PlantGrowth$group[c(1, 11, 21)])
-sentiment_df <- function(text, sentiment) {
+#'
+sentiment_df <- function(text, sentiment="all") {
 }
 
 #' Emoji Function
 #'
-#' Create a new factor from two existing factors, where the new factor's levels
-#' are the union of the levels of the input factors.
+#' Detect the word sentiments of a text and replace the with the matching emojis.
 #'
-#' @param text factor
-#' @param sentiment factor
+#' @param text string: A text string containing english words
+#' @param sentiment_dataframe data frame: A dataframe which contains word and key column which shows the sentiment of each word. Only supports
+#'                                        the Happy, Sad, Suprise, Fear and Angry as keys. If no dataframe is given the results of sentiment_df 
+#'                                        function would be used
 #'
-#' @return factor
+#' @return string:  A string containing only emoji's with no words. The emojis are written in the CLDR short name format.
 #' @export
-#' #examples
-#' fbind(iris$Species[c(1, 51, 101)], PlantGrowth$group[c(1, 11, 21)])
-emoji <- function(text, sentiment) {
+#' @examples
+#' textsentiment_to_emoji("I am very happy")
+textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
 }
 
 #' Sentiment Plot Function
 #'
-#' Create a new factor from two existing factors, where the new factor's levels
-#' are the union of the levels of the input factors.
+#' Generates a plot to show the top n sentiment words in the input text file.
 #'
-#' @param text factor
-#' @param sentiment factor
+#' @param text string: the input text for sentiment analysis
+#' @param sentiment string (optional): the sentiment that the analysis focuses on. Defaults to "happy".
+#' @param width integer (optional): the width of the output plot. Defaults to 10.
+#' @param height integer (optional): the height of the output plot. Defaults to 10.
 #'
-#' @return factor
+#' @return graph: a plot that shows the top n sentiment words of the input text file
 #' @export
-#' #examples
-#' fbind(iris$Species[c(1, 51, 101)], PlantGrowth$group[c(1, 11, 21)])
-sentiment_plot <- function(text, sentiment) {
+#' 
+sentiment_plot <- function(text, sentiment = "Happy", width=10, height=10) {
 }
 
 #' Counter Function
 #'
-#' Create a new factor from two existing factors, where the new factor's levels
-#' are the union of the levels of the input factors.
+#' Generates a summary dataframe of the input text which contains counts for characters, words, and sentences.
 #'
-#' @param text factor
-#' @param sentiment factor
+#' @param text string: the input text for sentiment analysis
 #'
-#' @return factor
+#' @return data frame: a data frame that contains the summary statistics for character, word, and sentence count.
 #' @export
-#' #examples
-#' fbind(iris$Species[c(1, 51, 101)], PlantGrowth$group[c(1, 11, 21)])
-counter <- function(text, sentiment) {
+#' @examples
+#' text_counter("I am very happy.")
+counter <- function(text) {
 }
