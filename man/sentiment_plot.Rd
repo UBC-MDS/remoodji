@@ -4,17 +4,20 @@
 \alias{sentiment_plot}
 \title{Sentiment Plot Function}
 \usage{
-sentiment_plot(text, sentiment)
+sentiment_plot(text, sentiment = "Happy", width = 10, height = 10)
 }
 \arguments{
-\item{text}{factor}
+\item{text}{string: the input text for sentiment analysis}
 
-\item{sentiment}{factor}
+\item{sentiment}{string (optional): the sentiment that the analysis focuses on. Defaults to "happy".}
+
+\item{width}{integer (optional): the width of the output plot. Defaults to 10.}
+
+\item{height}{integer (optional): the height of the output plot. Defaults to 10.}
 }
 \value{
-factor
+graph: a plot that shows the top n sentiment words of the input text file
 }
 \description{
-Create a new factor from two existing factors, where the new factor's levels
-are the union of the levels of the input factors.
+Generates a plot to show the top n sentiment words in the input text file.
 }

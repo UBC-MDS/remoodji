@@ -4,17 +4,17 @@
 \alias{counter}
 \title{Counter Function}
 \usage{
-counter(text, sentiment)
+counter(text)
 }
 \arguments{
-\item{text}{factor}
-
-\item{sentiment}{factor}
+\item{text}{string: the input text for sentiment analysis}
 }
 \value{
-factor
+data frame: a data frame that contains the summary statistics for character, word, and sentence count.
 }
 \description{
-Create a new factor from two existing factors, where the new factor's levels
-are the union of the levels of the input factors.
+Generates a summary dataframe of the input text which contains counts for characters, words, and sentences.
+}
+\examples{
+counter("I am very happy.")
 }
