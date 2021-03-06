@@ -4,17 +4,17 @@
 \alias{sentiment_df}
 \title{Sentiment df Function}
 \usage{
-sentiment_df(text, sentiment)
+sentiment_df(text, sentiment = "all")
 }
 \arguments{
-\item{text}{factor}
+\item{text}{string: the input text for sentiment analysis}
 
-\item{sentiment}{factor}
+\item{sentiment}{string (optional): the sentiment that the analysis focuses on, could be happy, angry, or sad etc. Defaults to "all".}
 }
 \value{
-factor
+dataframe: a data frame that contains the summary of sentiment analysis
 }
 \description{
-Create a new factor from two existing factors, where the new factor's levels
-are the union of the levels of the input factors.
+Generates a sentiment analysis summary dataframe of the input text. The summary dataframe would include
+the sentiment type, sentiment words, number of sentiment words, and highest sentiment percentage.
 }

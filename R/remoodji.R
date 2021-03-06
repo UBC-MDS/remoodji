@@ -54,6 +54,6 @@ sentiment_plot <- function(text, sentiment = "Happy", width=10, height=10) {
 #' @return data frame: a data frame that contains the summary statistics for character, word, and sentence count.
 #' @export
 #' @examples
-#' text_counter("I am very happy.")
+#' counter("I am very happy.")
 counter <- function(text) {
 }
