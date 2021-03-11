@@ -4,12 +4,12 @@
 \alias{sentiment_df}
 \title{Sentiment df Function}
 \usage{
-sentiment_df(text, sentiment = "all")
+sentiment_df(text, sentiment_input = "all")
 }
 \arguments{
 \item{text}{string: the input text for sentiment analysis}
 
-\item{sentiment}{string (optional): the sentiment that the analysis focuses on, could be happy, angry, or sad etc. Defaults to "all".}
+\item{sentiment_input}{string (optional): the sentiment that the analysis focuses on, could be happy, angry, or sad etc. Defaults to "all".}
 }
 \value{
 dataframe: a data frame that contains the summary of sentiment analysis
