@@ -4,6 +4,7 @@
 library(tidytext)
 library(tidyverse)
 library(dplyr)
+library(textdata)
 
 #' Sentiment df Function
 #'
@@ -18,9 +19,22 @@ library(dplyr)
 #'
 #'
 sentiment_df <- function(text, sentiment_input="all") {
+  
+  nrc <- tidytext::get_sentiments("nrc")
+  
+  
+  unique_sentiment <- levels(factor(nrc$sentiment))
+  
+  # exception
+  if (!is.character(text) | !is.character(sentiment_input)){
+    print("Only strings are allowed for function input")
+  }else if (!sentiment_input %in% unique_sentiment){
+    print("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
+  }
+  
 
   # make the words
-  text_df <- tibble(text)
+  text_df <- dplyr::tibble(text)
   colnames(text_df) <- c("text")
 
   text_df
@@ -34,11 +48,10 @@ sentiment_df <- function(text, sentiment_input="all") {
   total_words <- nrow(tidy_df)
 
   # add the sentiment
-  tidytext::get_sentiments("nrc")
 
-  tidy_df <- inner_join(tidy_df, get_sentiments("nrc"), by = "word") # merge text and nrc together
+  tidy_df <- dplyr::inner_join(tidy_df, get_sentiments("nrc"), by = "word") # merge text and nrc together
 
-  tidy_df <- count(tidy_df, word, sentiment, sort = TRUE) # add the word count
+  tidy_df <- dplyr::count(tidy_df, word, sentiment, sort = TRUE) # add the word count
 
   tidy_df$total_words <- total_words # total_words
 
@@ -46,22 +59,21 @@ sentiment_df <- function(text, sentiment_input="all") {
 
   colnames(tidy_df) <- c("word", "sentiment", "num_of_word", "total_words", "word_sent_percentage")
 
-  tidy_df  <- select(tidy_df, !total_words) # remove total words because we don't need it anymore
+  tidy_df  <- dplyr::select(tidy_df, !total_words) # remove total words because we don't need it anymore
 
-  join_df <- group_by(tidy_df, sentiment)
-  join_df <- summarise(join_df, sentiment_count = sum(num_of_word))
+  join_df <- dplyr::group_by(tidy_df, sentiment)
+  join_df <- dplyr::summarise(join_df, sentiment_count = sum(num_of_word))
 
-  tidy_df <- inner_join(tidy_df, join_df)
+  tidy_df <- dplyr::inner_join(tidy_df, join_df)
 
   if (sentiment_input == "all") {
     return(tidy_df)
   } else{
-    tidy_df <- filter(tidy_df, sentiment == sentiment_input)
+    tidy_df <- dplyr::filter(tidy_df, sentiment == sentiment_input)
     return(tidy_df)
   }
 }
 
-sentiment_df("I am happy")
 
 #' Emoji Function
 #'
@@ -92,14 +104,31 @@ textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
 #' @export
 #'
 sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
+  
+  # exception
+  # nrc <- tidytext::get_sentiments("nrc")
+  # 
+  # unique_sentiment <- levels(factor(nrc$sentiment))
+  
+  unique_sentiment <- c("all", "anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust", "positive", "negative")
+  
+  if (!is.character(text) | !is.character(sentiment_input)){
+    print("Only strings are allowed for function input")
+  }else if (!sentiment_input %in% unique_sentiment){
+    print("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
+  }else if (!is.numeric(width)){
+    print("Only integers are allowed for height input")
+  }else if (!is.numeric(height)){
+    print("Only integers are allowed for width input")
+  }
 
-  tidy_df <- sentiment_df(text, sentiment_input)
+  tidy_df <- remoodji::sentiment_df(text, sentiment_input)
   sentiment_word <- sentiment_input
 
   if (sentiment_word == "sentiment") {
-    join_df <- group_by(tidy_df, sentiment)
-    join_df <- summarise(join_df, sentiment_count = sum(num_of_word))
-    sentiment_plot <- ggplot(join_df, aes(x = reorder(sentiment, sentiment_count), y = sentiment_count, fill = sentiment)) +
+    join_df <- dplyr::group_by(tidy_df, sentiment)
+    join_df <- dplyr::summarise(join_df, sentiment_count = sum(num_of_word))
+    sentiment_plot <- ggplot2::ggplot(join_df, aes(x = reorder(sentiment, sentiment_count), y = sentiment_count, fill = sentiment)) +
       geom_bar(stat = 'identity') +
       ggtitle(paste0("Sentiments In Text")) +
       xlab("Sentiment") +
@@ -107,14 +136,14 @@ sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
       theme(legend.position = "none")
 
   } else if (sentiment_word == "all") {
-    all_df <- group_by(tidy_df, word)
-    all_df <- summarise(all_df, word_count = mean(num_of_word), sentiment = sentiment)
+    all_df <- dplyr::group_by(tidy_df, word)
+    all_df <- dplyr::summarise(all_df, word_count = mean(num_of_word), sentiment = sentiment)
 
     if (nrow(all_df) > 10){
       all_df <- all_df[0:10,] # slice top 10
     }
 
-    sentiment_plot <- ggplot(all_df, aes(x = reorder(word, word_count), y = word_count, fill = sentiment)) +
+    sentiment_plot <- ggplot2::ggplot(all_df, aes(x = reorder(word, word_count), y = word_count, fill = sentiment)) +
       geom_bar(stat = 'identity') +
       ggtitle(paste0("Top 10 ", sentiment_word, " Words")) +
       xlab("Word") +
@@ -123,14 +152,14 @@ sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
       theme(axis.text.x = element_text(angle = 60, hjust = 1))
 
   } else {
-    sent_df <- group_by(tidy_df, word)
-    sent_df <- summarise(sent_df, word_count = mean(num_of_word), sentiment = sentiment)
+    sent_df <- dplyr::group_by(tidy_df, word)
+    sent_df <- dplyr::summarise(sent_df, word_count = mean(num_of_word), sentiment = sentiment)
 
     if (nrow(sent_df) > 10){
       sent_df <- sent_df[0:10,] # slice top 10
     }
 
-    sentiment_plot <- ggplot(sent_df, aes(x = reorder(word, word_count), y = word_count, fill = word)) +
+    sentiment_plot <- ggplot2::ggplot(sent_df, aes(x = reorder(word, word_count), y = word_count, fill = word)) +
       geom_bar(stat = 'identity') +
       ggtitle(paste0("Top 10 ", sentiment_word, " Words")) +
       xlab("Word") +
