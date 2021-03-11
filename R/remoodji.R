@@ -18,6 +18,18 @@ library(dplyr)
 #'
 #'
 sentiment_df <- function(text, sentiment_input="all") {
+  
+  nrc <- get_sentiments("nrc")
+  
+  unique_sentiment <- unique(nrc$sentiment)
+  
+  # exception
+  if (!is.character(text) | !is.character(sentiment_input)){
+    print("Only strings are allowed for function input")
+  }else if (!sentiment_input %in% unique_sentiment){
+    print("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
+  }
+  
 
   # make the words
   text_df <- tibble(text)
@@ -34,7 +46,6 @@ sentiment_df <- function(text, sentiment_input="all") {
   total_words <- nrow(tidy_df)
 
   # add the sentiment
-  tidytext::get_sentiments("nrc")
 
   tidy_df <- inner_join(tidy_df, get_sentiments("nrc"), by = "word") # merge text and nrc together
 
@@ -92,6 +103,21 @@ textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
 #' @export
 #'
 sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
+  
+  # exception
+  nrc <- get_sentiments("nrc")
+  
+  unique_sentiment <- unique(nrc$sentiment)
+  
+  if (!is.character(text) | !is.character(sentiment_input)){
+    print("Only strings are allowed for function input")
+  }else if (!sentiment_input %in% unique_sentiment){
+    print("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
+  }else if (!is.numeric(width)){
+    print("Only integers are allowed for height input")
+  }else if (!is.numeric(height)){
+    print("Only integers are allowed for width input")
+  }
 
   tidy_df <- sentiment_df(text, sentiment_input)
   sentiment_word <- sentiment_input
