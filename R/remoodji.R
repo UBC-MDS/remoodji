@@ -5,6 +5,7 @@ library(tidytext)
 library(tidyverse)
 library(dplyr)
 library(textdata)
+library(emojifont)
 
 #' Sentiment df Function
 #'
@@ -93,7 +94,7 @@ textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
 
   # If no dataframe is given use the results of sentiment_df
   if (is.null(sentiment_dataframe)) {
-    sentiment_dataframe <- sentiment_df(text)
+    sentiment_dataframe <- remoodji::sentiment_df(text)
   }
 
   if (!is.data.frame(sentiment_dataframe)){
