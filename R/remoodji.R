@@ -19,16 +19,16 @@ library(textdata)
 #'
 #'
 sentiment_df <- function(text, sentiment_input="all") {
-  
-  unique_sentiment <- c("all", "anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust", "positive", "negative")
-  
+
+  unique_sentiment <- c("sentiment", "all", "anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust", "positive", "negative")
+
   # exception
   if (!is.character(text) | !is.character(sentiment_input)){
     stop("Only strings are allowed for function input")
   }else if (!sentiment_input %in% unique_sentiment){
     stop("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
   }
-  
+
 
   # make the words
   text_df <- dplyr::tibble(text)
@@ -101,9 +101,9 @@ textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
 #' @export
 #'
 sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
-  
-  unique_sentiment <- c("all", "anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust", "positive", "negative")
-  
+
+  unique_sentiment <- c("sentiment", "all", "anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust", "positive", "negative")
+
   if (!is.character(text) | !is.character(sentiment_input)){
     stop("Only strings are allowed for function input")
   }else if (!sentiment_input %in% unique_sentiment){
@@ -120,7 +120,7 @@ sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
   if (sentiment_word == "sentiment") {
     join_df <- dplyr::group_by(tidy_df, sentiment)
     join_df <- dplyr::summarise(join_df, sentiment_count = sum(num_of_word))
-    sentiment_plot <- ggplot2::ggplot(join_df, aes(x = reorder(sentiment, sentiment_count), y = sentiment_count, fill = sentiment)) +
+    sentimentplot <- ggplot2::ggplot(join_df, aes(x = reorder(sentiment, sentiment_count), y = sentiment_count, fill = sentiment)) +
       geom_bar(stat = 'identity') +
       ggtitle(paste0("Sentiments In Text")) +
       xlab("Sentiment") +
@@ -132,10 +132,10 @@ sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
     all_df <- dplyr::summarise(all_df, word_count = mean(num_of_word), sentiment = sentiment)
 
     if (nrow(all_df) > 10){
-      all_df <- all_df[0:10,] # slice top 10 
+      all_df <- all_df[0:10,] # slice top 10
     }
 
-    sentiment_plot <- ggplot2::ggplot(all_df, aes(x = reorder(word, word_count), y = word_count, fill = sentiment)) +
+    sentimentplot <- ggplot2::ggplot(all_df, aes(x = reorder(word, word_count), y = word_count, fill = sentiment)) +
       geom_bar(stat = 'identity') +
       ggtitle(paste0("Top 10 ", sentiment_word, " Words")) +
       xlab("Word") +
@@ -151,14 +151,14 @@ sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
       sent_df <- sent_df[0:10,] # slice top 10
     }
 
-    sentiment_plot <- ggplot2::ggplot(sent_df, aes(x = reorder(word, word_count), y = word_count, fill = word)) +
+    sentimentplot <- ggplot2::ggplot(sent_df, aes(x = reorder(word, word_count), y = word_count, fill = word)) +
       geom_bar(stat = 'identity') +
       ggtitle(paste0("Top 10 ", sentiment_word, " Words")) +
       xlab("Word") +
       ylab("Word Count") +
       theme(legend.position = "none")
   }
-  return(sentiment_plot)
+  return(sentimentplot)
 }
 
 #' Counter Function

@@ -37,18 +37,23 @@ test_that("Dataframe outputs are correct", {
 
 #' test_that function is sentiment_plot
 test_that('Plot should use geom_bar and map x to x-axis, and y to y-axis and fill to fill.', {
+
   test_text <- "I am happy and smiling and jumping and cheering and dancing, but still angry and crying inside."
+
   sentiment_plot_sentiment <- remoodji::sentiment_plot(test_text, sentiment_input = "sentiment")
   sentiment_plot_all <- remoodji::sentiment_plot(test_text, sentiment_input = "all")
   sentimentplot <- remoodji::sentiment_plot(test_text, sentiment_input = "joy")
+
   expect_true("GeomBar" %in% c(class(sentiment_plot_sentiment$layers[[1]]$geom)))
   expect_true("reorder(sentiment, sentiment_count)" == rlang::get_expr(sentiment_plot_sentiment$mapping$x))
   expect_true("sentiment_count" == rlang::get_expr(sentiment_plot_sentiment$mapping$y))
   expect_true("sentiment" == rlang::get_expr(sentiment_plot_sentiment$mapping$fill))
+
   expect_true("GeomBar" %in% c(class(sentiment_plot_all$layers[[1]]$geom)))
   expect_true("reorder(word, word_count)" == rlang::get_expr(sentiment_plot_all$mapping$x))
   expect_true("word_count" == rlang::get_expr(sentiment_plot_all$mapping$y))
   expect_true("sentiment" == rlang::get_expr(sentiment_plot_all$mapping$fill))
+
   expect_true("GeomBar" %in% c(class(sentimentplot$layers[[1]]$geom)))
   expect_true("reorder(word, word_count)" == rlang::get_expr(sentimentplot$mapping$x))
   expect_true("word_count" == rlang::get_expr(sentimentplot$mapping$y))
