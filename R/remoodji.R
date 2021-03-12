@@ -172,4 +172,36 @@ sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
 #' @examples
 #' counter("I am very happy.")
 counter <- function(text) {
+  #Must be a character
+  if (!is.character(text)){
+    stop("Only strings are allowed for function input")
+  }
+  #Can't be NA
+  else if(is.na(text)){
+    stop("Please input text")
+  }
+  #Can't be of length 0
+  else if(text == ""){
+    stop("Please input text")
+  }
+  #Must be vector of length 1
+  else if(length(text) > 1){
+    stop("Please input vector of length 1")
+  }
+
+  text_df <- tibble(text=text)
+
+  num_char <- nchar(text)
+
+  num_words <- text_df %>%
+    unnest_tokens(word, text) %>%
+    pull(word) %>%
+    length()
+
+  num_sentence <- text_df %>%
+    unnest_tokens(sentence, text, token="sentences") %>%
+    pull(sentence) %>%
+    length()
+
+  counter_df <- tibble("char_count" = num_char, "word_count" = num_words, "sentence_count" = num_sentence)
 }
