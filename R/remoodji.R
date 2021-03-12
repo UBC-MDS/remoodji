@@ -20,16 +20,13 @@ library(textdata)
 #'
 sentiment_df <- function(text, sentiment_input="all") {
   
-  nrc <- tidytext::get_sentiments("nrc")
-  
-  
-  unique_sentiment <- levels(factor(nrc$sentiment))
+  unique_sentiment <- c("all", "anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust", "positive", "negative")
   
   # exception
   if (!is.character(text) | !is.character(sentiment_input)){
-    print("Only strings are allowed for function input")
+    stop("Only strings are allowed for function input")
   }else if (!sentiment_input %in% unique_sentiment){
-    print("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
+    stop("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
   }
   
 
@@ -105,21 +102,16 @@ textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
 #'
 sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
   
-  # exception
-  # nrc <- tidytext::get_sentiments("nrc")
-  # 
-  # unique_sentiment <- levels(factor(nrc$sentiment))
-  
   unique_sentiment <- c("all", "anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust", "positive", "negative")
   
   if (!is.character(text) | !is.character(sentiment_input)){
-    print("Only strings are allowed for function input")
+    stop("Only strings are allowed for function input")
   }else if (!sentiment_input %in% unique_sentiment){
-    print("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
+    stop("Input not in [all, anger, anticipation, disgust, fear, joy, sadness, surprise, trust, positive, negative]")
   }else if (!is.numeric(width)){
-    print("Only integers are allowed for height input")
+    stop("Only integers are allowed for height input")
   }else if (!is.numeric(height)){
-    print("Only integers are allowed for width input")
+    stop("Only integers are allowed for width input")
   }
 
   tidy_df <- remoodji::sentiment_df(text, sentiment_input)
@@ -140,7 +132,7 @@ sentiment_plot <- function(text, sentiment_input = "joy", width=10, height=10) {
     all_df <- dplyr::summarise(all_df, word_count = mean(num_of_word), sentiment = sentiment)
 
     if (nrow(all_df) > 10){
-      all_df <- all_df[0:10,] # slice top 10
+      all_df <- all_df[0:10,] # slice top 10 
     }
 
     sentiment_plot <- ggplot2::ggplot(all_df, aes(x = reorder(word, word_count), y = word_count, fill = sentiment)) +
