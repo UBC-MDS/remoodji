@@ -37,6 +37,6 @@ Imports:
     textdata,
     dplyr,
     magrittr,
-    emojifront
+    emojifont
 Depends: 
     tidyverse
