@@ -35,6 +35,7 @@ Imports:
     forcats,
     tidytext,
     textdata,
-    dplyr
+    dplyr,
+    magrittr
 Depends: 
     tidyverse
