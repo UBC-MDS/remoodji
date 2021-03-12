@@ -66,11 +66,10 @@ test_that("Exception handlings for counter function are failing", {
   expect_error(remoodji::counter(123))
   expect_error(remoodji::counter(NA))
   expect_error(remoodji::counter(""))
-  expect_error(remoodji::counter(c("Surprise", "Vector")))
 })
 
 # test function for counter function
 test_that("Counter function output is correct", {
   # test output for counter function is correct
-  expect_equal(remoodji::counter("I am very happy."), tibble("char_count" = 16L, "word_count" = 4L, "sentence_count" = 1L))
+  expect_equal(remoodji::counter("I am very happy."), dplyr::tibble("char_count" = 16L, "word_count" = 4L, "sentence_count" = 1L))
 })
