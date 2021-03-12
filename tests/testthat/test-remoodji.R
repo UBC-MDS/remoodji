@@ -59,3 +59,18 @@ test_that('Plot should use geom_bar and map x to x-axis, and y to y-axis and fil
   expect_true("word_count" == rlang::get_expr(sentimentplot$mapping$y))
   expect_true("word" == rlang::get_expr(sentimentplot$mapping$fill))
 })
+
+# test function for exception handlings for counter function
+test_that("Exception handlings for counter function are failing", {
+  # test exception handling for counter function
+  expect_error(remoodji::counter(123))
+  expect_error(remoodji::counter(NA))
+  expect_error(remoodji::counter(""))
+  expect_error(remoodji::counter(c("Surprise", "Vector")))
+})
+
+# test function for counter function
+test_that("Counter function output is correct", {
+  # test output for counter function is correct
+  expect_equal(remoodji::counter("I am very happy."), tibble("char_count" = 16L, "word_count" = 4L, "sentence_count" = 1L))
+})
