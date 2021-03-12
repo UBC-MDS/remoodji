@@ -5,6 +5,7 @@ library(tidytext)
 library(tidyverse)
 library(dplyr)
 library(textdata)
+library(emojifont)
 
 #' Sentiment df Function
 #'
@@ -86,6 +87,72 @@ sentiment_df <- function(text, sentiment_input="all") {
 #' @examples
 #' textsentiment_to_emoji("I am very happy")
 textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
+  # testing text be a str type
+  if (!is.character(text)){
+    stop("Only strings are allowed for function input")
+  }
+
+  # If no dataframe is given use the results of sentiment_df
+  if (is.null(sentiment_dataframe)) {
+    sentiment_dataframe <- remoodji::sentiment_df(text)
+  }
+
+  if (!is.data.frame(sentiment_dataframe)){
+    stop("sentiment_dataframe must be a dataframe!")
+  }
+
+  if(!"word" %in% colnames(sentiment_dataframe))
+  {
+    stop("sentiment_dataframe must column 'word'")
+  }
+
+  if(!"sentiment" %in% colnames(sentiment_dataframe))
+  {
+    stop("sentiment_dataframe must column 'sentiment'")
+  }
+
+  # Removing punctuations in string
+  text <- gsub('[[:punct:] ]+',' ',text)
+
+  # Add the emojis of each word one by one
+  emojis <- c()
+
+  words <- strsplit(text, " ")[[1]]
+  for (word_to_change in words) {
+    df_filtered <-  dplyr::filter(sentiment_dataframe,word==word_to_change)
+    num_rows <- nrow(df_filtered)
+    # If no sentiment exists for the word go to the next word
+    if (num_rows==0) {
+      next
+    }
+    # Because a word might have multiple emotions one will be chosen randomly.
+    rand_row <- sample.int(num_rows,1)
+    sentiment <- dplyr::pull(df_filtered,sentiment)
+    sentiment <- sentiment[rand_row]
+    # Add the word according to the sentiment
+    if (sentiment == "anger") {
+      emojis <- append(emojis,emojifont::emoji('rage'))
+    } else if (sentiment == "anticipation") {
+      emojis <- append(emojis,emojifont::emoji('sunglasses'))
+    } else if (sentiment == "disgust") {
+      emojis <- append(emojis,emojifont::emoji('mask'))
+    } else if (sentiment == "fear") {
+      emojis <- append(emojis,emojifont::emoji('fearful'))
+    } else if (sentiment == "joy") {
+      emojis <- append(emojis,emojifont::emoji('smile'))
+    } else if (sentiment == "sadness") {
+      emojis <- append(emojis,emojifont::emoji('cry'))
+    } else if (sentiment == "surprise") {
+      emojis <- append(emojis,emojifont::emoji('open_mouth'))
+    } else if (sentiment == "trust") {
+      emojis <- append(emojis,emojifont::emoji('wink'))
+    } else if (sentiment == "positive") {
+      emojis <- append(emojis,emojifont::emoji('heavy_plus_sign'))
+    } else if (sentiment == "negative") {
+      emojis <- append(emojis,emojifont::emoji('heavy_minus_sign'))
+    }
+  }
+  emojis
 }
 
 #' Sentiment Plot Function

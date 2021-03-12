@@ -4,6 +4,7 @@ library(tidyverse)
 library(textdata)
 library(dplyr)
 library(testthat)
+library(emojifont)
 
 # test function for exception handling for sentiment_df function
 test_that("Exception handlings for sentiment_df function are failing", {
@@ -60,6 +61,23 @@ test_that('Plot should use geom_bar and map x to x-axis, and y to y-axis and fil
   expect_true("word" == rlang::get_expr(sentimentplot$mapping$fill))
 })
 
+
+# test function for exception handlings for textsentiment_to_emoji function
+test_that("Exception handlings for textsentiment_to_emoji  function are failing", {
+  # test exception handling for sentiment_plot function
+  expect_error(remoodji::textsentiment_to_emoji(123))
+  expect_error(remoodji::textsentiment_to_emoji("I am sad",123))
+  expect_error(remoodji::textsentiment_to_emoji("",data.frame(words=c("hi"),sentiment=c("fear"))))
+})
+
+# test function for correct output for textsentiment_to_emoji function
+test_that("Wrong output for textsentiment_to_emoji function", {
+  # test exception handling for sentiment_plot function
+  expect_equal(remoodji::textsentiment_to_emoji("I am hi",data.frame(word=c("hi"),sentiment=c("fear"))), emojifont::emoji('fearful'))
+  expect_null(remoodji::textsentiment_to_emoji("",data.frame(word=c("hi"),sentiment=c("fear"))))
+})
+
+
 # test function for exception handlings for counter function
 test_that("Exception handlings for counter function are failing", {
   # test exception handling for counter function
@@ -73,3 +91,4 @@ test_that("Counter function output is correct", {
   # test output for counter function is correct
   expect_equal(remoodji::counter("I am very happy."), dplyr::tibble("char_count" = 16L, "word_count" = 4L, "sentence_count" = 1L))
 })
+
