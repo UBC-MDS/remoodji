@@ -4,12 +4,12 @@
 \alias{sentiment_plot}
 \title{Sentiment Plot Function}
 \usage{
-sentiment_plot(text, sentiment = "Happy", width = 10, height = 10)
+sentiment_plot(text, sentiment_input = "joy", width = 10, height = 10)
 }
 \arguments{
 \item{text}{string: the input text for sentiment analysis}
 
-\item{sentiment}{string (optional): the sentiment that the analysis focuses on. Defaults to "happy".}
+\item{sentiment_input}{string (optional): the sentiment that the analysis focuses on. Defaults to "happy".}
 
 \item{width}{integer (optional): the width of the output plot. Defaults to 10.}
 
