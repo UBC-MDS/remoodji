@@ -84,8 +84,6 @@ sentiment_df <- function(text, sentiment_input="all") {
 #'
 #' @return string:  A string containing only emoji's with no words. The emojis are written in the CLDR short name format.
 #' @export
-#' @examples
-#' textsentiment_to_emoji("I am very happy")
 textsentiment_to_emoji <- function(text, sentiment_dataframe=NULL) {
   # testing text be a str type
   if (!is.character(text)){
