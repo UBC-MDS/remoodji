@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # remoodji
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/UBC-MDS/remoodji/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/remoodji/actions)
+[![codecov](https://codecov.io/gh/UBC-MDS/remoodji/branch/master/graph/badge.svg?token=7XPNSHR40J)](https://codecov.io/gh/UBC-MDS/remoodji)
 <!-- badges: end -->
 
 Remoodji is a text analysis package that focuses on sentiment analysis in text files in quantitative and qualitative ways. Specifically, it is used for determining what kind of underlying emotion your input text gives off and quantitative analyses of your text (character, word, and sentence count as well as visual and quantitative sentiment analysis). The emotions analyzed include angry, sad, happy, and disgust. Another core feature of Remoodji is it replaces words with emojis to provide the user with a text file where it is easier to pick up on the emotions being conveyed in a visually appealing snapshot view. This package can be useful when proofreading an important message which you want to elicit a certain emotion or tone, particularly with a given pattern or rhythm (speeches, letters, applications, songs, poems, etc).
