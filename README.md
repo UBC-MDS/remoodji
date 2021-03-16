@@ -4,6 +4,7 @@
 # remoodji
 
 <!-- badges: start -->
+[![codecov](https://codecov.io/gh/UBC-MDS/remoodji/branch/master/graph/badge.svg?token=7XPNSHR40J)](https://codecov.io/gh/UBC-MDS/remoodji)
 
 <!-- badges: end -->
 
