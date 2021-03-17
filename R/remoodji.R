@@ -53,7 +53,9 @@ sentiment_df <- function(text, sentiment_input="all") {
 
   ######
 
-  data <- read.table("~/remoodji/data/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt", header = FALSE)
+  #data <- read.table("~/remoodji/data/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt", header = FALSE)
+  data <- read.table("..//remoodji/data/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt", header = FALSE)
+
   colnames(data) <- c("word", "sentiment", "count")
   nrc <- data
 
