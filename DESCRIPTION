@@ -40,4 +40,5 @@ Imports:
     emojifont,
     magrittr
 Depends: 
-    tidyverse
+    tidyverse,
+    R (>= 2.10)
