@@ -48,7 +48,15 @@ sentiment_df <- function(text, sentiment_input="all") {
   # add the sentiment
 
   #nrc <- get_sentiments("nrc")
-  nrc <- textdata::lexicon_nrc(manual_download = FALSE)
+  #nrc <- textdata::lexicon_nrc(manual_download = TRUE)
+  #####
+
+  ######
+
+  data <- read.table("~/524/remoodji/data/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt", header = FALSE)
+  colnames(data) <- c("word", "sentiment", "count")
+  nrc <- data
+
   tidy_df <- dplyr::inner_join(tidy_df, nrc, by = "word") # merge text and nrc together
 
   tidy_df <- dplyr::count(tidy_df, word, sentiment, sort = TRUE) # add the word count
