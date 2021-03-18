@@ -273,4 +273,5 @@ counter <- function(text) {
     length()
 
   counter_df <- dplyr::tibble("char_count" = num_char, "word_count" = num_words, "sentence_count" = num_sentence)
+  return(counter_df)
 }
