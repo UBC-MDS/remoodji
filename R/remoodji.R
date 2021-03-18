@@ -54,6 +54,8 @@ sentiment_df <- function(text, sentiment_input="all") {
   colnames(data) <- c("word", "sentiment", "count")
   nrc <- data
 
+  nrc <- filter(nrc, count > 0)
+
   tidy_df <- dplyr::inner_join(tidy_df, nrc, by = "word") # merge text and nrc together
 
   tidy_df <- dplyr::count(tidy_df, word, sentiment, sort = TRUE) # add the word count
