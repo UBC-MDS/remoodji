@@ -38,6 +38,9 @@ Imports:
     textdata,
     dplyr,
     emojifont,
-    magrittr
+    magrittr,
+    ggplot2,
+    rlang
 Depends: 
-    tidyverse
+    tidyverse,
+    R (>= 2.10)
