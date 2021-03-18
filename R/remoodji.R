@@ -49,10 +49,6 @@ sentiment_df <- function(text, sentiment_input="all") {
 
   #nrc <- get_sentiments("nrc")
   #nrc <- textdata::lexicon_nrc(manual_download = TRUE)
-  #####
-
-  ######
-
   #data <- read.table("~/remoodji/data/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt", header = FALSE)
 
   colnames(data) <- c("word", "sentiment", "count")
