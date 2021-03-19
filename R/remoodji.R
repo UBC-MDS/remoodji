@@ -7,6 +7,7 @@ library(dplyr)
 library(textdata)
 library(emojifont)
 
+
 #' Sentiment df Function
 #'
 #' Generates a sentiment analysis summary dataframe of the input text. The summary dataframe would include
@@ -38,7 +39,7 @@ sentiment_df <- function(text, sentiment_input="all") {
   text_df
 
   text <- tidytext::unnest_tokens(text_df,word, text)
-
+  stop_words <- tidytext::stop_words
   # filter out stop words
   tidy_df <- dplyr::filter(text, !word %in% stop_words$word)
 

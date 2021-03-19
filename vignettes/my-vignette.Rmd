@@ -1,0 +1,63 @@
+---
+title: "Usage"
+authors: "Aidan Mattrick, Kevin Shahnazari, Rachel Wong, Zhanyi Su"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Here is a example of how this package could be used. Let's say there is a statement that you are trying to analyze. This is how you could implement our package.
+First you need to import this package with the following command:
+
+```{r setup}
+library(remoodji)
+```
+
+Let's say you have the following statement:
+`I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.`
+To start you might want to first determine the number of characters, words, and sentences to ensure that your statement fits within guidelines.
+
+```{r}
+counter('I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.')
+```
+
+After you have some insight into the length of your statement you would want to get a dataframe that will provide you with some statistics about the emotional content of your statement.
+
+```{r}
+sentiment_df("I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.")
+```
+
+Now you might want to take this tabular / text data and turn it into a data visualization so that you can better understand the breakdown of emotions used in your statement.
+
+```{r, fig.width=5, fig.height=5}
+sentiment_plot(text = "I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.", sentiment_input = "all")
+```
+
+Also you could change the sentiment parameter to only see words with one type of sentiment 
+
+```{r, fig.width=5, fig.height=5}
+sentiment_plot(text = "This week, show us a smile (yours or someone else's), make us smile, or both. Share a photo of something that has brought a moment of joy into your life recently, or focus on the outcome of that joy. If you're not feeling particularly cheerful at the moment — it's still 2018, after all — no need to fake your way into the challenge, either. Smiles come in all shades and flavors, including the half-hearted, tired, bitter, and resigned (to name a few). So whether the emotions you channel in your photo are full of cheer or not, I can't wait to see your take on this theme." , sentiment_input = "joy")
+```
+
+Lastly, you might want to visualize the emotions in this statement in a different way. This packages allows you to see the emotional words replaced with corresponding emojis for each type of emotion.
+
+```{r}
+textsentiment_to_emoji("I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.")
+```
+
+
+
+
+
+
+
+
