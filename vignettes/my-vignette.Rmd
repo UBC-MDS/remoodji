@@ -1,0 +1,30 @@
+---
+title: "my-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Here is a example of how this package could be used. Let's say there is a statement that you are trying to analyze. This is how you could implement our package.
+First you need to import this package with the following command:
+
+```{r setup}
+#library(remoodji)
+```
+
+Let's say you have the following statement:
+`I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.`
+To start you might want to first determine the number of characters, words, and sentences to ensure that your statement fits within guidelines.
+
+```{r}
+remoodji::counter('I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.')
+```
