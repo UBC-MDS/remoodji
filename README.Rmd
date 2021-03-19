@@ -16,11 +16,9 @@ knitr::opts_chunk$set(
 # remoodji
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/UBC-MDS/remoodji/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/remoodji/actions)
-[![codecov](https://codecov.io/gh/UBC-MDS/remoodji/branch/master/graph/badge.svg?token=7XPNSHR40J)](https://codecov.io/gh/UBC-MDS/remoodji)
 <!-- badges: end -->
 
-Remoodji is a text analysis package that focuses on sentiment analysis in text files in quantitative and qualitative ways. Specifically, it is used for determining what kind of underlying emotion your input text gives off and quantitative analyses of your text (character, word, and sentence count as well as visual and quantitative sentiment analysis). The emotions analyzed include angry, sad, happy, and disgust. Another core feature of Remoodji is it replaces words with emojis to provide the user with a text file where it is easier to pick up on the emotions being conveyed in a visually appealing snapshot view. This package can be useful when proofreading an important message which you want to elicit a certain emotion or tone, particularly with a given pattern or rhythm (speeches, letters, applications, songs, poems, etc).
+The goal of remoodji is to ...
 
 ## Installation
 
@@ -36,20 +34,6 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/remoodji")
 ```
-## Functions
-
-Counter:
-- With an input of textfile it will output a dataframe with character count, word count, and sentence count.
-
-Sentiment Analysis Dataframe:
-- With an input of a textfile it will output a dataframe with sentiment analysis (e.g. sentiment type, sentiment words, and percentage of overall sentiment per emotion).
-
-Character Replacement:
-- With the input of a textfile and the ability to choose which emotions you would like to replace (e.g. certain emotions or all) it will output a textfile that has emotional words replaced with emojis.
-
-Sentiment Analysis Plot:
-- With the input of a dataframe from the sentiment analysis function it will output a visualization on the most emotionally charged words that appear in the text.
-
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
@@ -59,30 +43,18 @@ library(remoodji)
 ## basic example code
 ```
 
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r sentiment_df}
+```{r cars}
+summary(cars)
 ```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
+
+You can also embed plots, for example:
 
 ```{r pressure, echo = FALSE}
-#plot(pressure) - put plot here
+plot(pressure)
 ```
 
-## Contribution to Ecosystem
-
-- While [tidytext](https://github.com/juliasilge/tidytext) (R) and [nltk](https://github.com/nltk/nltk) (Python) already exist, this package takes it a step further by providing qualitative sentiment analysis in a visually appealing format by replacing emotional words with emojis and further analyzing text data to provide more quantitative sentiment analysis.
-- We also add visualizations to further this quantitative sentiment analysis in a way that these packages do not.
-
-## Dependencies
-
-- TODO
-
-## Contributors
-
-* [Aidan Mattrick](https://github.com/aidanmattrick)
-* [Kevin Shahnazari](https://github.com/kshahnazari1998)
-* [Zhanyi Su](https://github.com/YikiSu)
-* [Rachel Wong](https://github.com/rachelywong)
-
-### Credits
-
-This package was created with Devtools from R packages by Hadley Wickham and Jenny Bryan (https://r-pkgs.org/index.html). 
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
