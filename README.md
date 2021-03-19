@@ -39,19 +39,23 @@ devtools::install_github("UBC-MDS/remoodji")
 
 ## Functions
 
-Counter: - With an input of textfile it will output a dataframe with
+Counter: 
+- With an input of textfile it will output a dataframe with
 character count, word count, and sentence count.
 
-Sentiment Analysis Dataframe: - With an input of a textfile it will
+Sentiment Analysis Dataframe: 
+- With an input of a textfile it will
 output a dataframe with sentiment analysis (e.g. sentiment type,
 sentiment words, and percentage of overall sentiment per emotion).
 
-Character Replacement: - With the input of a textfile and the ability to
+Character Replacement: 
+- With the input of a textfile and the ability to
 choose which emotions you would like to replace (e.g. certain emotions
 or all) it will output a textfile that has emotional words replaced with
 emojis.
 
-Sentiment Analysis Plot: - With the input of a dataframe from the
+Sentiment Analysis Plot: 
+- With the input of a dataframe from the
 sentiment analysis function it will output a visualization on the most
 emotionally charged words that appear in the text.
 
@@ -83,6 +87,80 @@ library(remoodji)
     quantitative sentiment analysis.
 -   We also add visualizations to further this quantitative sentiment
     analysis in a way that these packages do not.
+    
+## Usage
+
+Here is a example of how this package could be used. Let's say there is a statement that you are trying to analyze. This is how you could implement our package.
+
+First you need to import this package with the following command: 
+
+`library('remoodji')`
+
+Let's say you have the following statement:
+
+`I was happily walking.`
+
+To start you might want to first determine the number of characters, words, and sentences to ensure that your statement fits within guidelines.
+
+`counter('I was happily walking.')`
+
+This would output a tibble with the following values:
+
+ | char_count  | word_count    |sentence_count|
+ | ------------- | ------------- | -------------| 
+| 22          | 4            |       1       |
+
+After you have some insight into the length of your statement you would want to get a dataframe that will provide you with some statistics about the emotional content of your statement.
+
+`sentiment_df("I was happily walking.")`
+
+| word  | sentiment | num_of_word| word_sent_percentage | sentiment_count |  
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| happily  | None  | 0     | 0.000000  | 1.0 |
+| happily | None   | 0     | 0.000000  | 1.0 |
+| happily  | Fear  | 1     | 0.166667  | 1.0  |
+| happily | None   | 0         | 0.000000  | 1.0 |
+| happily  | None   | 0        | 0.000000  | 5.0  |
+| happily  | Angry  | 1  | 0.166667  | 1.0  |
+| happily  | None  | 0  | 0.000000  | 1.0  |
+| happily  | Surprise  | 1  | 0.166667  | 1.0  |
+| happily  | Sad  | 1| 0.166667  | 1.0  |
+| happily  | Surprise | 1 | 0.166667  | 1.0 |
+| happily  | None | 0 | 0.000000  | 1.0  |
+| became  | None  | 0  | 0.000000  | 1.0 |
+| happily  | Happy  | 1  | 0.166667  | 1.0  |
+
+Now you might want to take this tabular / text data and turn it into a data visualization so that you can better understand the breakdown of emotions used in your statement.
+
+`pyemoodji.sentiment_plot(
+        "I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead.",
+        sentiment="all"
+    )`
+    
+![alt text](assets/Plot_example1.png)
+    
+Also you could change the sentiment parameter to only see words with one type of sentiment 
+
+`pyemoodji.sentiment_plot(
+        "This week, show us a smile (yours or someone else's), make us smile, or both. Share a photo of something that has brought a moment of joy into your life recently, or focus on the outcome of that joy. If you're not feeling particularly cheerful at the moment — it's still 2018, after all — no need to fake your way into the challenge, either. Smiles come in all shades and flavors, including the half-hearted, tired, bitter, and resigned (to name a few). So whether the emotions you channel in your photo are full of cheer or not, I can't wait to see your take on this theme.",
+        sentiment="happy"
+    )`
+    
+![alt text](assets/Plot_example2.png)
+ 
+ Lastly, you might want to visualize the emotions in this statement in a different way. This packages allows you to see the emotional words replaced with corresponding emojis for each type of emotion.
+ 
+ `pyemoodji.textsentiment_to_emoji(
+        "I was happily walking. I then saw a monster and I got scared. However, when I found out it was a prank I became angry instead."
+    )`
+ 
+ :smiley: :cry: :open_mouth: :open_mouth: :rage: :scream:
+
+
+## Documentation
+
+The official documentation is hosted on Read the Docs: https://pyemoodji.readthedocs.io/en/latest/
+
 
 ## Dependencies
 
