@@ -30,7 +30,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),
-    covr
+    covr,
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
 Imports: 
     forcats,
@@ -44,3 +46,4 @@ Imports:
 Depends: 
     tidyverse,
     R (>= 2.10)
+VignetteBuilder: knitr
