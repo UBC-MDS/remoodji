@@ -4,7 +4,7 @@ authors: "Aidan Mattrick, Kevin Shahnazari, Rachel Wong, Zhanyi Su"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Usage}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
